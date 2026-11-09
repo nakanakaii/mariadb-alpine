@@ -24,6 +24,22 @@ RUN case "$TARGETARCH" in \
       add alpine-baselayout alpine-keys busybox apk-tools \
           mariadb mariadb-client
 
+RUN rm -f \
+      /rootfs/usr/bin/mariadb-embedded \
+      /rootfs/usr/bin/mariadb-plugin \
+      /rootfs/usr/bin/mariadb-slap \
+      /rootfs/usr/bin/mariadb-import \
+      /rootfs/usr/bin/mariadb-show \
+      /rootfs/usr/bin/mariadb-check \
+      /rootfs/usr/bin/mariadb-dump \
+      /rootfs/usr/bin/mariadb-binlog \
+      /rootfs/usr/bin/mariadb-tzinfo-to-sql \
+      /rootfs/usr/bin/mariadb-waitpid \
+      /rootfs/usr/bin/mariadb-conv \
+      /rootfs/usr/bin/mariadb-ldb \
+      /rootfs/usr/bin/mariadb-secure-installation && \
+    rm -rf /rootfs/usr/share/doc /rootfs/usr/share/man /rootfs/usr/share/info
+
 COPY docker-entrypoint.sh /rootfs/usr/local/bin/docker-entrypoint.sh
 
 RUN chmod +x /rootfs/usr/local/bin/docker-entrypoint.sh && \
