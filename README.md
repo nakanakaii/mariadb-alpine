@@ -5,7 +5,7 @@ An Alpine-based MariaDB server image built from Alpine Mini Root Filesystem and 
 - `linux/amd64`
 - `linux/arm64`
 
-Replace `ghcr.io/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY:latest` below with the image published by this repository.
+Replace `ghcr.io/nakanakaii/mariadb-alpine:latest` below with the image published by this repository.
 
 ## Development
 
@@ -14,7 +14,7 @@ This setup leaves the root account without a password and creates one applicatio
 ```yaml
 services:
   mariadb:
-    image: ghcr.io/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY:latest
+    image: ghcr.io/nakanakaii/mariadb-alpine:latest
     container_name: mariadb-dev
     restart: unless-stopped
     ports:
@@ -82,7 +82,7 @@ Use a non-empty root password and a separate application user. Do not commit rea
 ```yaml
 services:
   mariadb:
-    image: ghcr.io/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY:latest
+    image: ghcr.io/nakanakaii/mariadb-alpine:latest
     container_name: mariadb
     restart: unless-stopped
     ports:
@@ -159,6 +159,6 @@ The scheduled build can also be started manually from the repository's **Actions
 The published image tags are:
 
 ```text
-ghcr.io/<owner>/<repository>:latest
-ghcr.io/<owner>/<repository>:sha-<commit>
+ghcr.io/nakanakaii/mariadb-alpine:latest
+ghcr.io/nakanakaii/mariadb-alpine:sha-<commit>
 ```
