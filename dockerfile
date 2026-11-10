@@ -22,7 +22,12 @@ RUN case "$TARGETARCH" in \
       --keys-dir /rootfs/etc/apk/keys \
       --no-cache \
       add alpine-baselayout alpine-keys busybox apk-tools \
-          mariadb mariadb-client
+          mariadb mariadb-client zlib
+
+RUN apk --root /rootfs \
+      --keys-dir /rootfs/etc/apk/keys \
+      --no-cache \
+      add --upgrade zlib
 
 RUN rm -f \
       /rootfs/usr/bin/mariadb-embedded \
