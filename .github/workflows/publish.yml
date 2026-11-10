@@ -18,6 +18,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+      id-token: write
 
     steps:
       - name: Checkout
@@ -65,8 +66,21 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             ALPINE_VERSION=${{ steps.alpine.outputs.version }}
+          sbom: true
+          provenance: mode=max
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3
+
+      - name: Sign candidate image
+        shell: bash
+        run: |
+          set -euo pipefail
+          candidate_digest="$(docker buildx imagetools inspect "${IMAGE}:candidate" \
+            --format '{{.Manifest.Digest}}')"
+          cosign sign --yes "${IMAGE}@${candidate_digest}"
 
       - name: Promote only when latest changed
         shell: bash
