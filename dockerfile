@@ -27,7 +27,7 @@ RUN case "$TARGETARCH" in \
 RUN apk --root /rootfs \
       --keys-dir /rootfs/etc/apk/keys \
       --no-cache \
-      add --upgrade zlib
+      add --upgrade musl zlib
 
 RUN rm -f \
       /rootfs/usr/bin/mariadb-embedded \
